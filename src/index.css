@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-mono: "VT323", monospace;
+  --color-cyan: #00ffff;
+  --color-mag: #ff00ff;
+}
+
+@layer base {
+  body {
+    @apply bg-[#050505] text-[#00ffff] font-mono;
+    cursor: crosshair;
+  }
+}
+
+@layer utilities {
+  .glitch {
+    position: relative;
+    text-shadow: 0.05em 0 0 rgba(255, 0, 255, 0.75),
+      -0.025em -0.05em 0 rgba(0, 255, 255, 0.75),
+      0.025em 0.05em 0 rgba(255, 255, 0, 0.75);
+    animation: glitch 500ms infinite;
+  }
+
+  .glitch span {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  @keyframes glitch {
+    0% {
+      text-shadow: 0.05em 0 0 rgba(255, 0, 255, 0.75),
+        -0.05em -0.025em 0 rgba(0, 255, 255, 0.75),
+        -0.025em 0.05em 0 rgba(255, 255, 0, 0.75);
+    }
+    14% {
+      text-shadow: 0.05em 0 0 rgba(255, 0, 255, 0.75),
+        -0.05em -0.025em 0 rgba(0, 255, 255, 0.75),
+        -0.025em 0.05em 0 rgba(255, 255, 0, 0.75);
+    }
+    15% {
+      text-shadow: -0.05em -0.025em 0 rgba(255, 0, 255, 0.75),
+        0.025em 0.025em 0 rgba(0, 255, 255, 0.75),
+        -0.05em -0.05em 0 rgba(255, 255, 0, 0.75);
+    }
+    49% {
+      text-shadow: -0.05em -0.025em 0 rgba(255, 0, 255, 0.75),
+        0.025em 0.025em 0 rgba(0, 255, 255, 0.75),
+        -0.05em -0.05em 0 rgba(255, 255, 0, 0.75);
+    }
+    50% {
+      text-shadow: 0.025em 0.05em 0 rgba(255, 0, 255, 0.75),
+        0.05em 0 0 rgba(0, 255, 255, 0.75),
+        0 -0.05em 0 rgba(255, 255, 0, 0.75);
+    }
+    99% {
+      text-shadow: 0.025em 0.05em 0 rgba(255, 0, 255, 0.75),
+        0.05em 0 0 rgba(0, 255, 255, 0.75),
+        0 -0.05em 0 rgba(255, 255, 0, 0.75);
+    }
+    100% {
+      text-shadow: -0.025em 0 0 rgba(255, 0, 255, 0.75),
+        -0.025em -0.025em 0 rgba(0, 255, 255, 0.75),
+        -0.025em -0.05em 0 rgba(255, 255, 0, 0.75);
+    }
+  }
+
+  .crt-lines {
+    background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.25) 50%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.06),
+      rgba(0, 255, 0, 0.02),
+      rgba(0, 0, 255, 0.06)
+    );
+    z-index: 100;
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
+  }
+
+  .screen-tear {
+    animation: screen-tear 4s infinite;
+  }
+
+  @keyframes screen-tear {
+    0% { transform: skew(0deg); }
+    1% { transform: skew(30deg); opacity: 0.5; }
+    2% { transform: skew(-30deg); opacity: 0.5; }
+    3% { transform: skew(0deg); opacity: 1; }
+  }
+}
+
+@layer base {
+  .scanline {
+    width: 100%;
+    height: 100px;
+    z-index: 99;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0) 100%);
+    opacity: 0.1;
+    position: fixed;
+    bottom: 100%;
+    pointer-events: none;
+    animation: scanline 8s linear infinite;
+  }
+
+  @keyframes scanline {
+    0% { bottom: 100%; }
+    100% { bottom: -100px; }
+  }
+
+  .flicker {
+    animation: flicker 0.15s infinite;
+  }
+
+  @keyframes flicker {
+    0% { opacity: 0.95; }
+    5% { opacity: 0.85; }
+    10% { opacity: 1; }
+    15% { opacity: 0.9; }
+    20% { opacity: 0.8; }
+    25% { opacity: 1; }
+    30% { opacity: 0.95; }
+    100% { opacity: 1; }
+  }
+}
